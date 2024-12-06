@@ -1,0 +1,101 @@
+{
+    "name": "distributed_high_sr_ffhq",
+    "phase": "train", // train or val
+    "gpu_ids": [
+        0,1,2,3
+    ],
+    "path": { //set the path
+        "log": "logs",
+        "tb_logger": "tb_logger",
+        "results": "results",
+        "checkpoint": "checkpoint",
+        "resume_state": "/home/t-nnaeem/workspace/RemoteSensingFoundationModels/Image-Super-Resolution-Iterative-Refinement/experiments/distributed_high_sr_ffhq_240802_154233/checkpoint/I80000_E43"
+        // "resume_state": null
+        // "resume_state": "experiments/distributed_high_sr_ffhq_210901_121212/checkpoint/I830000_E32" //pretrain model or training state
+    },
+    "datasets": {
+        "train": {
+            "name": "FFHQ",
+            "mode": "HR", // whether need LR img
+            "dataroot": "dataset/S2_aligned",//"dataset/farmvibes_S2_all/RGB",
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 128, // low resolution need to super_resolution
+            "r_resolution": 384, // high resolution
+            "batch_size": 4,
+            "gradient_accumulation_steps": 64,
+            "num_workers": 128,
+            "use_shuffle": true,
+            "data_len": -1 // -1 represents all data used in train
+        },
+        "val": {
+            "name": "CelebaHQ",
+            "mode": "LRHR",
+            "dataroot": "dataset/PC_S2_tif_val",
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 128,
+            "r_resolution": 384,
+            "data_len": 50
+        }
+    },
+    "model": {
+        "which_model_G": "sr3", // use the ddpm or sr3 network structure
+        "finetune_norm": false,
+        "unet": {
+            "in_channel": 20, //changed from 6 to 20
+            "out_channel": 10, //changed from 3 to 10
+            "inner_channel": 64,
+            "norm_groups": 16,
+            "channel_multiplier": [
+                1,
+                2,
+                4,
+                8,
+                8,
+                16,
+                16
+            ],
+            "attn_res": [
+                // 16
+            ],
+            "res_blocks": 3,
+            "dropout": 0
+        },
+        "beta_schedule": { // use munual beta_schedule for acceleration
+            "train": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 0.5e-6,//changed from 1e-6 (i.e., 1/200000th of the std of the imagenet)
+                "linear_end": 0.5e-2 //changed from 1e-2 (i.e., 1/20th of the std of the imagenet)
+            },
+            "val": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 0.5e-6, //changed from 1e-2 (i.e., 1/200000th of the std of the imagenet)
+                "linear_end": 0.5e-2 //changed from 1e-2 (i.e., 1/20th of the std of the imagenet)
+            }
+        },
+        "diffusion": {
+            "image_size": 384,
+            "channels": 10, //sample channel Nazish:changed from 3 to 10
+            "conditional": true // unconditional generation or unconditional generation(super_resolution)
+        }
+    },
+    "train": {
+        "n_iter": 1000000,
+        "val_freq": 1e4,
+        "save_checkpoint_freq": 1e4,
+        "print_freq": 50,
+        "optimizer": {
+            "type": "lamb",
+            "lr": 1e-4 //changed learning rate and type of optimizer
+        },
+        "ema_scheduler": { // not used now
+            "step_start_ema": 5000,
+            "update_ema_every": 1,
+            "ema_decay": 0.9999
+        }
+    },
+    "wandb": {
+        "project": "distributed_high_sr_ffhq"
+    }
+}

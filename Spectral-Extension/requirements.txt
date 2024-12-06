@@ -1,0 +1,15 @@
+torchvision
+torchsummary
+matplotlib
+rasterio
+geopandas
+pystac_client
+planetary_computer
+odc-stac
+scikit-image
+lmdb
+opencv-python
+tensorboard
+tqdm
+tensorflow
+tensorboardX
