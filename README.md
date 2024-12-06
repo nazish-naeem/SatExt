@@ -1,5 +1,5 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Satellite imaging has vast applications in 
 
 # Getting Started
 Clone the github repo
