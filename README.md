@@ -1,5 +1,34 @@
 # Introduction 
-Satellite imaging has vast applications in 
+Satellite imaging is pivotal in enabling remote sensing and monitoring of our planet. As a result, it can support many applications such as climate monitoring, natural resource management, agricultural monitoring, defense, etc. Unfortunately, despite the presence of more than 1k satellites in space, today we cannot perform frequent remote monitoring of a specific region. This is because the current remote sensing algorithms rely on only one type of satellite. Therefore its operation is limited by the frequency at which that specific satellite visits a certain location. Additionally, the presence of clouds, malfunction in the sensors, and corrupted data further limit the frequency of monitoring the Earth.
+
+This work proposes, SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2's high dimensionality in both spectral and spatial domains, as well as its widespread use as a baseline for most remote sensing algorithms. 
+
+The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise.
+
+The use of a generative AI allows us to extend this project in the future to cloud inpainting, fixing corrupted data, multi-modal extension for generating dummy data, etc.
+
+<table>
+  <tr>
+    <td align="center">Extending to Multiple Satellite</td>
+     <td align="center">Cloud Inpainting</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/e3f82cab-63c5-4400-bc65-42fad24a4e3e" width=500></td>
+    <td><img src="https://github.com/user-attachments/assets/8f58707d-734e-41b2-a692-911eee206571" width=500></td>
+  </tr>
+
+  <tr>
+    <td align="center">Multimodal Extension using Stable Diffusion</td>
+     <td align="center">Fixing Corrupted Sensor Data </td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/fcae1cc6-45e3-421f-832f-08f121740d89" width=500></td>
+    <td><img src="https://github.com/user-attachments/assets/7445ee56-4346-49a6-87db-c17ffb5c36b2" width=500></td>
+  </tr>
+ </table>
+
+
+
 
 # Getting Started
 Clone the github repo
