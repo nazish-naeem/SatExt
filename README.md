@@ -3,7 +3,16 @@ Satellite imaging is pivotal in enabling remote sensing and monitoring of our pl
 
 This work proposes, SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2's high dimensionality in both spectral and spatial domains, as well as its widespread use as a baseline for most remote sensing algorithms. 
 
-The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise.
+The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise. Here we show an end-to-end SatExt system flow:
+
+<img width="1103" alt="SatExt-e2e" src="https://github.com/user-attachments/assets/592fbc8f-4399-4e50-ac64-f08126f37616" />
+
+Following we show an animation of the Diffusion model in action, when generating high spatial resolution Sentinel-2 images from noise given low resolution images.
+
+
+https://github.com/user-attachments/assets/7d826396-7bb1-40ab-9e5c-ec8177ec64ca
+
+
 
 The use of a generative AI allows us to extend this project in the future to cloud inpainting, fixing corrupted data, multi-modal extension for generating dummy data, etc.
 
