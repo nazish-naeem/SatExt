@@ -83,8 +83,6 @@ python train_ae.py --resume_path [path/to/model/resume/the/training/from, None o
 
 This module allows us to choose the model from Residual in Residual Dense Block(RRDB), Residual Channel Attenuation Network(RCAN)[2], Fully Convolutional Netwrok(FCONV), and Autoencoder(AE). This file saves the results/checkpoints in folder Spectral-Extension/experiments
 
-
-
 Note that here you do not have to give the path of the validation data. Given the path of the dataset the dataloader performs an 80-20 split with a seed so everytime the dataloader is called the split remains unchanged.
 
 
@@ -99,9 +97,12 @@ the final results are saved in Spectral-Extension/eval/.
 
 
 # Super Resolution
+
 ### Training 
+
 To train the super resolution model run the following command
 ```
+cd 
 python sr_our.py -c config/sr_S2_RGB.json
 ```
 the config file contains all the information about the test and validation data, model parameters, noise scheduler, testing and training settings. All the hyper-parameters can be changed by changing the coonfig file.
