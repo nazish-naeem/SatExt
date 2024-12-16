@@ -102,7 +102,7 @@ the final results are saved in Spectral-Extension/eval/.
 
 To train the super resolution model run the following command
 ```
-cd 
+cd Image-Super-Resolution-Iterative-Refinement
 python sr_our.py -c config/sr_S2_RGB.json
 ```
 the config file contains all the information about the test and validation data, model parameters, noise scheduler, testing and training settings. All the hyper-parameters can be changed by changing the coonfig file.
@@ -115,36 +115,23 @@ python infr.py -c config/sr_S2_RGB_infr.json
 ```
 
 
-# Run E2E test
+
+
+# Run End-to-End Test
 After training both steps, end-to-end system can be run using the following commands
 
 ```
 python main.py --config [path/to/super-resolution/config/file] --resume_path [path/to/spectral-extension/model/weights] --model [the type of spectral extension model in use. Choose from 'RCAN', 'FCONV', 'RRDB'] --data_path [path/to/data]
 ```
-the results are saved under '''experiments''.
+the results are saved under `experiments`.
 
-
-
-
-# Baseline
-
-### Training 
-to train the baselines, run the following commands
-```
-cd Spectral-Extension
-python train_baseline.py --resume_path [path/to/model/resume/the/training/from, None otherwise] --model [type of model, choose from 'RRDB','RCAN','FCONV','AE'] --lr [learning rate]
-```
-results and checkpoints are saved in Spectral-Extension/experiments_baseline
-
-### Testing
-```
-python eval_baseline.py --resume_path [path/to/model/resume/the/training/from, None otherwise] --model [type of model, choose from 'RRDB','RCAN','FCONV','AE']
-```
-the final results are saved in Spectral-Extension/eval_baseline/.
-`[model name].txt` saves the mean and variance of psnr and ssim of all the sentinel-2 bands
 
 # References
 
 [1] Saharia, Chitwan, et al. "Image super-resolution via iterative refinement." IEEE transactions on pattern analysis and machine intelligence 45.4 (2022): 4713-4726.
 [2] Yulun Zhang, Kunpeng Li, Kai Li, Lichen Wang, Bineng Zhong, and Yun Fu, “Image super-resolution using very deep residual channel attention networks,” in Proceedings of the European conference on computer vision (ECCV), 2018, pp. 286–301.
+
+Credits: The Super Resolution code is derived from [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement). Which is an unoffical implementeation of [1]. You can find the original readme in the `Image-Super-Resolution-Iterative-Refinement` to get a better understanding of how it works.
+
+This work was a part of a three month summer internship at Microsoft Research mentored by Peder Olsen and Vaishnavi Ranganathan.
 
