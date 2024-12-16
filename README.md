@@ -3,7 +3,7 @@ Satellite imaging is pivotal in enabling remote sensing and monitoring of our pl
 
 This work proposes, SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2's high dimensionality in both spectral and spatial domains, as well as its widespread use as a baseline for most remote sensing algorithms. 
 
-The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise. Here we show an end-to-end SatExt system flow:
+The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [1], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise. Here we show an end-to-end SatExt system flow:
 
 <img width="1103" alt="SatExt-e2e" src="https://github.com/user-attachments/assets/592fbc8f-4399-4e50-ac64-f08126f37616" />
 
@@ -80,8 +80,14 @@ To train the spectral extension model, run the following command
 cd Spectral-Extension
 python train_ae.py --resume_path [path/to/model/resume/the/training/from, None otherwise] --model [type of model, choose from 'RRDB','RCAN','FCONV','AE'] --lr [learning rate]
 ```
-This files saves the results/checkpoints in folder Spectral-Extension/experiments
-Note that here you do not have to give the path of the validation data unlike super resolution module. Given the path of the dataset the dataloader performs an 80-20 split with a seed so everytime the dataloader is called the split remains unchanged.
+
+This module allows us to choose the model from Residual in Residual Dense Block(RRDB), Residual Channel Attenuation Network(RCAN)[2], Fully Convolutional Netwrok(FCONV), and Autoencoder(AE). This file saves the results/checkpoints in folder Spectral-Extension/experiments
+
+
+
+Note that here you do not have to give the path of the validation data. Given the path of the dataset the dataloader performs an 80-20 split with a seed so everytime the dataloader is called the split remains unchanged.
+
+
 
 ### Testing
 run the following commands to perform evaluation
@@ -136,5 +142,8 @@ python eval_baseline.py --resume_path [path/to/model/resume/the/training/from, N
 the final results are saved in Spectral-Extension/eval_baseline/.
 `[model name].txt` saves the mean and variance of psnr and ssim of all the sentinel-2 bands
 
-# Contribute
+# References
+
+[1] Saharia, Chitwan, et al. "Image super-resolution via iterative refinement." IEEE transactions on pattern analysis and machine intelligence 45.4 (2022): 4713-4726.
+[2] Yulun Zhang, Kunpeng Li, Kai Li, Lichen Wang, Bineng Zhong, and Yun Fu, “Image super-resolution using very deep residual channel attention networks,” in Proceedings of the European conference on computer vision (ECCV), 2018, pp. 286–301.
 
