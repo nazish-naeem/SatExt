@@ -1,7 +1,7 @@
 # Introduction 
 Satellite imaging is pivotal in enabling remote sensing and monitoring of our planet. As a result, it can support many applications such as climate monitoring, natural resource management, agricultural monitoring, defense, etc. Unfortunately, despite the presence of more than 1k satellites in space, today we cannot perform frequent remote monitoring of a specific region. This is because the current remote sensing algorithms rely on only one type of satellite. Therefore its operation is limited by the frequency at which that specific satellite visits a certain location. Additionally, the presence of clouds, malfunction in the sensors, and corrupted data further limit the frequency of monitoring the Earth.
 
-This work proposes, SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2's high dimensionality in both spectral and spatial domains, as well as its widespread use as a baseline for most remote sensing algorithms. 
+This work proposes SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote sensing and monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2's high dimensionality in both spectral and spatial domains, as well as its widespread use as a baseline for most remote sensing algorithms. 
 
 The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [1], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise. Here we show an end-to-end SatExt system flow:
 
@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/7d826396-7bb1-40ab-9e5c-ec8177ec64ca
 
 
 
-The use of a generative AI allows us to extend this project in the future to cloud inpainting, fixing corrupted data, multi-modal extension for generating dummy data, etc.
+The use of a generative AI allows us to extend this project in the future to cloud inpainting, fixing corrupted data, multi-modal extension for generating dummy data, etc. A few potential usecases: 
 
 <table>
   <tr>
