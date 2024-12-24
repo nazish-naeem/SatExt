@@ -1,14 +1,14 @@
 # Introduction 
-Satellite imaging is pivotal in enabling remote sensing and monitoring of our planet. As a result, it can support many applications such as climate monitoring, natural resource management, agricultural monitoring, defense, etc. Unfortunately, despite the presence of more than 1k satellites in space, today we cannot perform frequent remote monitoring of a specific region. This is because the current remote sensing algorithms rely on only one type of satellite. Therefore its operation is limited by the frequency at which that specific satellite visits a certain location. Additionally, the presence of clouds, malfunction in the sensors, and corrupted data further limit the frequency of monitoring the Earth.
+Satellite imaging is pivotal in enabling remote sensing and monitoring of our planet. As a result, it can support many applications such as climate monitoring, natural resource management, agricultural monitoring, defense, etc. Unfortunately, despite the presence of more than 1k satellites in space, today we cannot perform frequent remote monitoring of a specific region. 
+Different satellites will in general have a different pixel resolution and different spectral response curves that will not be compatible with each other. Therefore current remote sensing algorithms rely on only one type of satellite and its operation is limited by the frequency at which that specific satellite visits a certain location.  Additionally, the presence of clouds, malfunction in the sensors, and corrupted data further limit the frequency of monitoring the Earth.
 
-This work proposes SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote sensing and monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2's high dimensionality in both spectral and spatial domains, as well as its widespread use as a baseline for most remote sensing algorithms. 
+This work proposes SatExt, which is a spectral, spatial, and temporal extension of the satellite images for remote sensing and monitoring tasks. The primary aim is to leverage generative AI (GenAI) to standardize satellite images into a unified format—specifically, the Sentinel-2 format. This choice is motivated by Sentinel-2 being freely available, having a high revisit rate, good spatial pixel resolution (10m) and containing 13 carefully chosen spectral bands useful to a multitude of applications.
 
-The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model ,inspired by [1], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise. Here we show an end-to-end SatExt system flow:
+The first step, termed Spectral Extension, leverages the spectral information available in the input satellite images (e.g., Landsat) to reconstruct the Sentinel-2 frequency spectrum while preserving the original spatial resolution. The second step focuses on enhancing spatial resolution. Here, a Diffusion Model, inspired by [1], is employed to transform low-resolution data into high-resolution imagery, effectively generating fine-grained details from noise. Here we show an end-to-end SatExt system flow:
 
 <img width="1103" alt="SatExt-e2e" src="https://github.com/user-attachments/assets/592fbc8f-4399-4e50-ac64-f08126f37616" />
 
 Following we show an animation of the Diffusion model in action, when generating high spatial resolution Sentinel-2 images from noise given low resolution images.
-
 
 https://github.com/user-attachments/assets/7d826396-7bb1-40ab-9e5c-ec8177ec64ca
 
@@ -81,7 +81,7 @@ cd Spectral-Extension
 python train_ae.py --resume_path [path/to/model/resume/the/training/from, None otherwise] --model [type of model, choose from 'RRDB','RCAN','FCONV','AE'] --lr [learning rate]
 ```
 
-This module allows us to choose the model from Residual in Residual Dense Block(RRDB), Residual Channel Attenuation Network(RCAN)[2], Fully Convolutional Netwrok(FCONV), and Autoencoder(AE). This file saves the results/checkpoints in folder Spectral-Extension/experiments
+This module allows us to choose the model from Residual in Residual Dense Block(RRDB) [2], Residual Channel Attenuation Network(RCAN) [3], Fully Convolutional Network(FCONV) [4], and Autoencoder(AE). This file saves the results/checkpoints in folder Spectral-Extension/experiments
 
 Note that here you do not have to give the path of the validation data. Given the path of the dataset the dataloader performs an 80-20 split with a seed so everytime the dataloader is called the split remains unchanged.
 
@@ -129,7 +129,9 @@ the results are saved under `experiments`.
 # References
 
 [1] Saharia, Chitwan, et al. "Image super-resolution via iterative refinement." IEEE transactions on pattern analysis and machine intelligence 45.4 (2022): 4713-4726.
-[2] Yulun Zhang, Kunpeng Li, Kai Li, Lichen Wang, Bineng Zhong, and Yun Fu, “Image super-resolution using very deep residual channel attention networks,” in Proceedings of the European conference on computer vision (ECCV), 2018, pp. 286–301.
+[2] Zhang, Yulun, et al. "Residual dense network for image super-resolution." Proceedings of the IEEE conference on computer vision and pattern recognition. 2018.
+[3] Yulun Zhang, Kunpeng Li, Kai Li, Lichen Wang, Bineng Zhong, and Yun Fu, “Image super-resolution using very deep residual channel attention networks,” in Proceedings of the European conference on computer vision (ECCV), 2018, pp. 286–301.
+[4] Chen, Qifeng, Jia Xu, and Vladlen Koltun. "Fast image processing with fully-convolutional networks." Proceedings of the IEEE International Conference on Computer Vision. 2017.
 
 Credits: The Super Resolution code is derived from [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement). Which is an unoffical implementeation of [1]. You can find the original readme in the `Image-Super-Resolution-Iterative-Refinement` to get a better understanding of how it works.
 
