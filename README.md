@@ -136,7 +136,7 @@ the results are saved under `experiments`.
 
 [4] Chen, Qifeng, Jia Xu, and Vladlen Koltun. "Fast image processing with fully-convolutional networks." Proceedings of the IEEE International Conference on Computer Vision. 2017.
 
-Credits: The Super Resolution code is derived from [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement). Which is an unoffical implementeation of [1]. You can find the original readme in the `Image-Super-Resolution-Iterative-Refinement` to get a better understanding of how it works.
+Credits: The Super Resolution code is derived from [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement). Which is an unoffical implementation of [1]. You can find the original readme in the `Image-Super-Resolution-Iterative-Refinement` to get a better understanding of how it works.
 
 This work was a part of a three month summer internship at Microsoft Research mentored by Peder Olsen and Vaishnavi Ranganathan.
 
