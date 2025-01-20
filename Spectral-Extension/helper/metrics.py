@@ -36,30 +36,7 @@ def tensor2img(tensor, out_type=np.uint8, min_max=(-1, 1)):
 
 def save_img(img, img_path, mode='RGB'):
     cv2.imwrite(img_path, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
-    # cv2.imwrite(img_path, img)
 from skimage import exposure
-# def s2_to_img(s2, percentile=(0.5, 99.5), gamma=0.9, bands = [2,1,0],min_max=(-1,1)):
-#     """
-#     Function to create RGB representation of a Sentinel-2 image.
-#     """
-#     # img = s2[bands].transpose([1, 2, 0])
-#     img = np.zeros((s2.shape[1],s2.shape[2],len(bands)))
-#     for b in range(len(bands)):
-#         img[:,:,b] = s2[bands[b],:,:]
-    
-#     # img = np.clip(img, a_min=0.0, a_max=1.0) * 255.0
-#     # img = tensor2img(img, out_type=np.uint8, min_max=min_max)
-#     img = (img - min_max[0]) / \
-#         (min_max[1] - min_max[0]) #range from 0 to 1
-#     nb = img.shape[2]
-#     for b in range(nb):
-#         plow, phigh = np.percentile(img[...,b], percentile)
-#         if phigh>plow:
-#             y_ = exposure.rescale_intensity(img[...,b], in_range=(plow, phigh))
-#             if gamma!=1.0:
-#                 y_ = y_ ** gamma
-#             img[...,b] = (y_*255)
-#     return img.astype(np.uint8)
 
 def s2_to_img(s2, percentile=(0.5, 99.5), gamma=0.9, bands = [2,1,0],min_max=(0, 1)):
     """

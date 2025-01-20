@@ -22,7 +22,6 @@ def get_paths_from_images(path):
                 img_path = os.path.join(dirpath, fname)
                 images.append(img_path)
     assert images, '{:s} has no valid image file'.format(path)
-    # print(images)
     return sorted(images)
 
 
@@ -64,13 +63,6 @@ def transform2tensor(img, min_max=(0, 1)):
     return img
 
 
-# implementation by numpy and torch
-# def transform_augment(img_list, split='val', min_max=(0, 1)):
-#     imgs = [transform2numpy(img) for img in img_list]
-#     imgs = augment(imgs, split=split)
-#     ret_img = [transform2tensor(img, min_max) for img in imgs]
-#     return ret_img
-
 
 # implementation by torchvision, detail in https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement/issues/14
 totensor = torchvision.transforms.ToTensor()
@@ -86,10 +78,6 @@ def transform_augment(img_list, split='val', min_max=(0, 1)):
 
 def transform_augment_tif(img_list, split='val', min_max=(0, 1)):    
     imgs = [torch.from_numpy(img) for img in img_list]
-    # if split == 'train':
-    #     imgs = torch.stack(imgs, 0)
-    #     imgs = hflip(imgs)
-    #     imgs = torch.unbind(imgs, dim=0)
     ret_img = [img * (min_max[1] - min_max[0]) + min_max[0] for img in imgs]
     return ret_img
 
@@ -98,10 +86,7 @@ def s2_to_img(s2, percentile=(0.5, 99.5), gamma=0.9, bands = [2,1,0]):
     Function to create RGB representation of a Sentinel-2 image.
     """
     img = s2[bands].transpose([1, 2, 0])
-    # img = img/10000
     nb = img.shape[2]
-    # image_numpy = np.clip((image_numpy + 1.0) / 2.0 * 1.8, a_min=0.0, a_max=1.0) * 255.0
-    #img = np.clip((img + 1.0) / 2.0, a_min=0.0, a_max=1.0) * 255.0
     img = np.clip(img, a_min=0.0, a_max=1.0) * 255.0
     for b in range(nb):
         plow, phigh = np.percentile(img[...,b], percentile)

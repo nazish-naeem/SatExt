@@ -29,8 +29,6 @@ def s2_to_img(s2, percentile=(0.5, 99.5), gamma=0.9, bands = [3,2,1]):
     """
     img = s2[bands].transpose([1, 2, 0])
     nb = img.shape[2]
-    # image_numpy = np.clip((image_numpy + 1.0) / 2.0 * 1.8, a_min=0.0, a_max=1.0) * 255.0
-    #img = np.clip((img + 1.0) / 2.0, a_min=0.0, a_max=1.0) * 255.0
     img = np.clip(img, a_min=0.0, a_max=1.0) * 255.0
     for b in range(nb):
         plow, phigh = np.percentile(img[...,b], percentile)

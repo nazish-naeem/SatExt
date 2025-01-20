@@ -55,13 +55,10 @@ if args.model=='AE':
 if args.model=='FCONV':
     model = FConv((6, 128, 128))
 if args.model=='RCAN':
-    # model = RCAN(num_features=64, num_rg=10, num_rcab=20, scale=1, reduction=16, in_channels=6, out_channels=10)
     model = RCAN(num_features=64, num_rg=5, num_rcab=10, scale=3, reduction=16, in_channels=6, out_channels=10)
 
 if args.model=='RRDB':
-    # model = RCAN(num_features=64, num_rg=10, num_rcab=20, scale=1, reduction=16, in_channels=6, out_channels=10)
     model = rrdb.RRDBModel(in_nc=6, out_nc=10, nf=32, nb=8, gc=16, scale_factor=3)
-    # model = rrdb_sd.RRDBModel(in_nc=6, out_nc=10, nf=32, nb=8, gc=16, scale_factor=1, rdb_prob=0.0, rrdb_prob=0.5, num_rdb=6).to(device)
 
 dataset_test = LSS2Dataset(args.data_path, split='test', data_len=-1)
 

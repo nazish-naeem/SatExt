@@ -13,8 +13,5 @@ def get_low_res(img,ratio):
 def load_tifs(client,id):
     run_id = client.list_runs()[id] # will list the most recent run_id
     run = client.get_run_by_id(run_id)
-
-    # with rasterio.open(run.output['raster'][0].assets[0].path_or_url) as src:
-    #     print(src.meta)
     return rasterio.open(run.output['raster'][0].assets[0].path_or_url)
 
