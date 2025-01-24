@@ -28,7 +28,19 @@ import torch.nn.functional as F
 import numpy as np
 import torchvision
 import pickle
+
+
+
 def visualize(visuals,t,result_path,current_step,idx):
+    '''
+    This function helps in visualizing the input/output images by saving the high resolution, super resolution, low resolution and interpolate high resolution baseline images
+    
+    Input Params: 
+    visuals = dictionary with  high resolution 'HR', super resolution 'SR', low resolution 'LR' and interpolate high resolution 'INF'
+    t = time stamp we want to save the 'SR' image for
+    result_path = saves the images to the result_path with the following format result_path/idx/current_step_t_[hr/sr/lr/inf].png
+    current_step/idx = the image id and the current loop step. Only responsible for naming the saved rgb files.
+    '''
     t_step = t
     
     if t==len(visuals['SR'][:,0,0,0])-1:
@@ -57,9 +69,30 @@ def visualize(visuals,t,result_path,current_step,idx):
 
 
 def loss_fun(pred,out):
+    '''
+    Computes the smooth l1 loss
+    
+    Input Params:
+    pred = model prediction/output
+    out = output/ground truth
+
+    Output Params:
+    returns loss
+    '''
     return F.smooth_l1_loss(pred,out)
 
 def f_pass(inp,out,model):
+    '''
+    This function is the forward pass function for the model
+
+    Input Params:
+    inp = input
+    out = output
+    model = model
+
+    Output Params:
+    returns the loss and pred (predicted output)
+    '''
     inp = inp.float()
     out = out.float()
     inp = Variable(inp)
@@ -79,15 +112,24 @@ def f_pass(inp,out,model):
     return loss,pred
 
 
-def HR_to_LR_SR(LR,lr = 128, hr = 384):
-    # SR = np.zeros((LR.shape[0],LR.shape[1],hr,hr))
-    # for j in range(SR.shape[1]):
-    #     for i in range(SR.shape[0]):
-    #         SR[i,j,:,:] = skimage.transform.resize(LR[i,j,:,:], SR[i,j,:,:].shape, order=3,preserve_range=True) #resize_and_convert(img_LR[i,j,:,:], hr, Image.BICUBIC)
+def LR_to_SR(LR, hr = 384):
+    '''
+    Given a low resolution image, this function returns a bicubic interpolate high resolution image
+
+    Input Params:
+    LR =  low resolution image
+    hr = the target resolution (hr,hr)
+
+    Output Params:
+    SR = interpolated (bicubic) high resolution image
+    '''
     SR = F.interpolate(LR,size=(hr,hr),mode='bicubic')
-    return LR,SR
+    return SR
 
 def load_spect_ext_model(args):
+    '''
+    Given args, this function returns the spectral extension model that the user specifies
+    '''
     if args.model=='AE':
         model = AE((6, 128, 128),10)
     if args.model=='FCONV':
@@ -166,8 +208,6 @@ if __name__ == "__main__":
     result_path = '{}'.format(opt['path']['results'])
     os.makedirs(result_path, exist_ok=True)
     
-    # totensor = torchvision.transforms.ToTensor()
-    print(result_path)
     current_step=0
     for _,  test_data in enumerate(test_loader):
         idx += 1
@@ -175,10 +215,8 @@ if __name__ == "__main__":
         inp, out, index = test_data['LS'], test_data['S2'], test_data['Index']
         model.eval()
         with torch.no_grad():
-            loss,pred = f_pass(inp,out,model)
-        print(pred.type)
-        img_LR, img_SR = HR_to_LR_SR(pred,lr = 128, hr = 384)
-        print(pred.shape)
+            loss,pred = f_pass(inp,out,model) #predicting low resolution Sentinel-2 image from Landsat
+        img_SR = LR_to_SR(pred, hr = 384) #producing corresponsing low quality high resoltuioon Sentinel-2 Image ready to be used by diffusion model for high resolution
         val_data = {'HR': test_data['S2_HR'], 'SR': torch.tensor(img_SR), 'Index': index}
 
 
@@ -190,21 +228,9 @@ if __name__ == "__main__":
         hr_img = Metrics.tensor2img(visuals['HR'])  # uint8
         fake_img = Metrics.tensor2img(visuals['INF'])  # uint8
         os.makedirs(result_path+'/'+str(idx)+'/', exist_ok=True)
-        # for t_step in range(len(visuals['SR'][:,0,0,0])):
-        #     visualize(visuals,t_step,result_path,current_step,idx)
         t_step = -1
         visualize(visuals,t_step,result_path,current_step,idx)
-        
-        # sr_img = Metrics.tensor2img(visuals['SR'])  # uint8
-        # Metrics.save_img(
-        #     sr_img, '{}/{}/{}_sr_process.png'.format(result_path, idx, current_step))
-        # Metrics.save_img(
-        #     Metrics.tensor2img(visuals['SR'][-1]), '{}/{}/{}_sr.png'.format(result_path, idx, current_step))
 
-        # Metrics.save_img(
-        #     hr_img, '{}/{}/{}_hr.png'.format(result_path, idx, current_step))
-        # Metrics.save_img(
-        #     fake_img, '{}/{}/{}_inf.png'.format(result_path, idx, current_step))
         visuals['LS'] = test_data['LS']
         with open('{}/{}/{}.pkl'.format(result_path, idx, current_step), "wb") as f:
             pickle.dump(visuals, f)
