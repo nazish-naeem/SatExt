@@ -145,8 +145,16 @@ the results are saved under `experiments`.
 This project welcomes contributions and all contributions will be openly shared as per the Open source license requirements. If you use this repository, please cite it as follows:
 
 **APA**:  
-Naeem, N., Ranganathan, V., Olsen, P.,(2025). *SatExt* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
+Naeem, N., Ranganathan, V., Olsen, P.,(2025). *SatExt: 4D GenAI for Earth Monitoring/Remote Sensing Using Satellites* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
 
-**IEEE**:  
-N. Naeem, V. Ranganathan, P. Olsen “SatExt”, GitHub, 2025. [Online]. Available: https://github.com/nazish-naeem/SatExt
+```
+@misc{Naeem2025,
+  author = {Naeem, N., Ranganathan, V., Olsen, P.,},
+  title = {SatExt: 4D GenAI for Earth Monitoring/Remote Sensing Using Satellites},
+  year = {2025},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/nazish-naeem/SatExt}},
+}
+```
 
