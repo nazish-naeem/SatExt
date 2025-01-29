@@ -136,17 +136,17 @@ the results are saved under `experiments`.
 
 [4] Chen, Qifeng, Jia Xu, and Vladlen Koltun. "Fast image processing with fully-convolutional networks." Proceedings of the IEEE International Conference on Computer Vision. 2017.
 
-Credits: The Super Resolution code is derived from [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement). Which is an unoffical implementation of [1]. You can find the original readme in the `Image-Super-Resolution-Iterative-Refinement` to get a better understanding of how it works. Dynamic World Samples are borrowed from [PRESTO(The Pretrained Remote Sensing Transformer) ](https://github.com/nasaharvest/presto/tree/main)
+**Credits:** The Super Resolution code is derived from [here](https://github.com/Janspiry/Image-Super-Resolution-via-Iterative-Refinement). Which is an unoffical implementation of [1]. You can find the original readme in the `Image-Super-Resolution-Iterative-Refinement` to get a better understanding of how it works. Dynamic World Samples are borrowed from [PRESTO(The Pretrained Remote Sensing Transformer) ](https://github.com/nasaharvest/presto/tree/main)
 
-This work was a part of a three month summer internship at Microsoft Research mentored by Peder Olsen and Vaishnavi Ranganathan.
+**Acknowledgement:** This work was a part of a three month summer internship at Microsoft Research mentored by Peder Olsen and Vaishnavi Ranganathan.
 
 # Contribution and Citation
 
 This project welcomes contributions and all contributions will be openly shared as per the Open source license requirements. If you use this repository, please cite it as follows:
 
 **APA**:  
-NazishNaeem. (2025). *SatExt* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
+Naeem, N., Olsen, P., Ranganathan, V.,  (2025). *SatExt* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
 
 **IEEE**:  
-N. Naeem, “SatExt”, GitHub, 2025. [Online]. Available: https://github.com/nazish-naeem/SatExt
+N. Naeem, P. Olsen, V. Ranganathan “SatExt”, GitHub, 2025. [Online]. Available: https://github.com/nazish-naeem/SatExt
 
