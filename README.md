@@ -140,3 +140,13 @@ Credits: The Super Resolution code is derived from [here](https://github.com/Jan
 
 This work was a part of a three month summer internship at Microsoft Research mentored by Peder Olsen and Vaishnavi Ranganathan.
 
+# Contribution and Citation
+
+This project welcomes contributions and all contributions will be openly shared as per the Open source license requirements. If you use this repository, please cite it as follows:
+
+**APA**:  
+NazishNaeem. (2025). *SatExt* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
+
+**IEEE**:  
+N. Naeem, “SatExt”, GitHub, 2025. [Online]. Available: https://github.com/nazish-naeem/SatExt
+
