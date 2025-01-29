@@ -145,8 +145,8 @@ the results are saved under `experiments`.
 This project welcomes contributions and all contributions will be openly shared as per the Open source license requirements. If you use this repository, please cite it as follows:
 
 **APA**:  
-Naeem, N., Olsen, P., Ranganathan, V.,  (2025). *SatExt* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
+Naeem, N., Ranganathan, V., Olsen, P.,(2025). *SatExt* (Version 1.0) [Computer software]. GitHub. https://github.com/nazish-naeem/SatExt
 
 **IEEE**:  
-N. Naeem, P. Olsen, V. Ranganathan “SatExt”, GitHub, 2025. [Online]. Available: https://github.com/nazish-naeem/SatExt
+N. Naeem, V. Ranganathan, P. Olsen “SatExt”, GitHub, 2025. [Online]. Available: https://github.com/nazish-naeem/SatExt
 
